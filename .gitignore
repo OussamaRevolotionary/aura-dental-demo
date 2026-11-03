@@ -1,0 +1,7 @@
+node_modules
+dist
+*.tsbuildinfo
+# source renders and personal notes stay local
+Material/
+AURA-site.zip
+.claude/
