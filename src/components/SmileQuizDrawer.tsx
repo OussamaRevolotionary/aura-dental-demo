@@ -48,7 +48,7 @@ export default function SmileQuizDrawer() {
             role="dialog"
             aria-modal="true"
             aria-label={t.quiz.aria}
-            className="fixed inset-y-0 end-0 z-[95] flex w-full max-w-[540px] flex-col bg-alabaster shadow-2xl sm:rounded-s-media"
+            className="fixed end-0 top-0 z-[95] flex h-[100dvh] w-full max-w-[540px] flex-col bg-alabaster shadow-2xl sm:rounded-s-media"
             initial={{ x: off }}
             animate={{ x: 0 }}
             exit={{ x: off }}
@@ -239,7 +239,7 @@ function QuizFlow({ preset, style, onClose }: { preset: GoalId | null; style: St
       </div>
 
       {!done && (
-        <div className="flex items-center justify-between gap-3 border-t border-hairline bg-white/70 px-6 py-4 backdrop-blur-xl sm:px-8">
+        <div className="flex items-center justify-between gap-3 border-t border-hairline bg-white/70 px-6 pb-[calc(16px+env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl sm:px-8">
           <button
             onClick={() => go(step - 1)}
             disabled={step === 0}

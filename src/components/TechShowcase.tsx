@@ -85,7 +85,7 @@ export default function TechShowcase() {
       <div className="container-luxe relative">
         <SectionHeader index="03" eyebrow={t.tech.eyebrow} title={t.tech.title} tone="cyan" center dark />
 
-        <Reveal delay={0.1} className="mt-14">
+        <Reveal delay={0.1} className="mt-10 sm:mt-14">
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-white/10 bg-white/10 lg:grid-cols-4">
             {STATS.map((s, i) => (
               <div key={i} className="bg-obsidian/80 px-5 py-6 sm:px-8 sm:py-8">
@@ -99,7 +99,7 @@ export default function TechShowcase() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
+        <div className="mt-10 sm:mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
           <ImplantDiagram part={tech.part} onSelect={selectPart} />
 
           <div className="flex flex-col" role="tablist" aria-label={t.tech.tabsAria}>

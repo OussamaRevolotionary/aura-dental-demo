@@ -1,8 +1,8 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { CalendarCheck, CalendarDays, Check, CheckCircle2, ClipboardList, LayoutDashboard, Loader2, MessageCircle, X } from "lucide-react";
+import { CalendarCheck, CalendarDays, Check, CheckCircle2, ClipboardList, LayoutDashboard, Loader2, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { BOOKING_API, bookVisit, fetchSlots, isoDay } from "../config/bookingApi";
-import { CLINIC, clinicStatus, sendLead, whatsappLink } from "../config/clinic";
+import { CLINIC, clinicStatus, sendLead, telLink, whatsappLink } from "../config/clinic";
 import { DEMO } from "../config/demo";
 import { useUI } from "../context/UIContext";
 import { useOverlay } from "../hooks/useLockBody";
@@ -21,12 +21,13 @@ function useClinicStatus() {
 
 /** Floating bottom concierge: WhatsApp + quick booking. */
 export default function ConciergeBar() {
-  const { openBooking, quizOpen, bookingOpen } = useUI();
+  const { openBooking, quizOpen, bookingOpen, panel } = useUI();
   const { t, locale } = useI18n();
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
   const status = useClinicStatus();
   useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 480));
+  const overlay = quizOpen || bookingOpen || panel !== null;
 
   const opensLabel = useMemo(() => {
     if (status.open) return "";
@@ -39,13 +40,13 @@ export default function ConciergeBar() {
   return (
     <>
       <AnimatePresence>
-        {visible && !quizOpen && !bookingOpen && (
+        {visible && !overlay && (
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="fixed bottom-4 end-4 z-40 flex items-center gap-1.5 rounded-full border border-white/50 bg-white/80 p-1.5 shadow-luxe backdrop-blur-2xl sm:bottom-6 sm:end-6"
+            className="fixed bottom-6 end-6 z-40 hidden items-center gap-1.5 rounded-full border border-white/50 bg-white/80 p-1.5 shadow-luxe backdrop-blur-2xl sm:flex"
           >
             <a
               href={whatsappLink(t.concierge.hello)}
@@ -75,6 +76,23 @@ export default function ConciergeBar() {
           </motion.div>
         )}
       </AnimatePresence>
+      {!overlay && (
+        <nav
+          aria-label={t.concierge.aria}
+          className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.15fr_1.15fr] gap-2 border-t border-hairline bg-alabaster/95 px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pt-2.5 backdrop-blur-xl sm:hidden"
+        >
+          <a href={telLink()} className="flex h-12 items-center justify-center gap-2 rounded-full border border-ink/10 bg-white text-[13.5px] font-semibold">
+            <Phone className="h-4 w-4" /> {t.faq.visit.call}
+          </a>
+          <a href={whatsappLink(t.concierge.hello)} target="_blank" rel="noopener noreferrer" className="relative flex h-12 items-center justify-center gap-2 rounded-full bg-[#1FAF5A] text-[13.5px] font-semibold text-white">
+            <MessageCircle className="h-4 w-4" /> {t.concierge.whatsapp}
+            {status.open && <span className="absolute end-2.5 top-2 h-2 w-2 rounded-full bg-[#BBF7D0]" />}
+          </a>
+          <button onClick={openBooking} className="flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-[13.5px] font-semibold text-alabaster">
+            <CalendarDays className="h-4 w-4" /> {t.concierge.book}
+          </button>
+        </nav>
+      )}
       <BookingModal />
     </>
   );
@@ -106,8 +124,9 @@ function BookingModal() {
             exit={{ y: 60, opacity: 0 }}
             transition={{ duration: 0.55, ease: EASE }}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[92vh] w-full max-w-[560px] overflow-y-auto rounded-t-card bg-alabaster shadow-2xl sm:rounded-card"
+            className="max-h-[92dvh] w-full max-w-[560px] overflow-y-auto rounded-t-card bg-alabaster shadow-2xl sm:rounded-card"
           >
+            <div aria-hidden className="mx-auto mt-2.5 h-1 w-10 rounded-full bg-ink/15 sm:hidden" />
             <BookingForm onClose={closeBooking} />
           </motion.div>
         </motion.div>
@@ -362,7 +381,7 @@ function BookingForm({ onClose }: { onClose: () => void }) {
         <p className="text-[11.5px] text-ink-muted">{fmt(BOOKING_API ? b.liveNote : b.note, { coord: CLINIC.coordinatorName })}</p>
       </div>
 
-      <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-hairline bg-alabaster/90 px-6 py-4 backdrop-blur-xl sm:px-8">
+      <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-hairline bg-alabaster/90 px-6 pb-[calc(16px+env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl sm:px-8">
         <span className="truncate text-[12px] text-ink-muted">{slot ? `${dateLabel} · ${slot}` : b.none}</span>
         {BOOKING_API ? (
           <button type="submit" disabled={sending} className="btn-primary btn-sm shrink-0 py-3">

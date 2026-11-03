@@ -27,7 +27,7 @@ export default function BentoTreatments() {
       id: "veneers",
       goal: "makeover",
       caseId: "veneers",
-      className: "lg:col-span-2 min-h-[500px]",
+      className: "min-h-[440px] lg:col-span-2 lg:min-h-[500px]",
       dark: true,
       visual: (
         <>
@@ -46,7 +46,7 @@ export default function BentoTreatments() {
       id: "implants",
       goal: "replace",
       caseId: "implants",
-      className: "lg:row-span-2 min-h-[500px]",
+      className: "min-h-[440px] lg:row-span-2 lg:min-h-[500px]",
       dark: true,
       visual: (
         <>
@@ -64,13 +64,13 @@ export default function BentoTreatments() {
       id: "aligners",
       goal: "straighter",
       caseId: "aligners",
-      className: "min-h-[400px]",
+      className: "min-h-[360px] lg:min-h-[400px]",
       visual: <AlignerVisual label={t.treatments.stages} />,
     },
     {
       id: "hygiene",
       goal: "whiter",
-      className: "min-h-[400px]",
+      className: "min-h-[360px] lg:min-h-[400px]",
       visual: (
         <>
           <img
@@ -86,10 +86,10 @@ export default function BentoTreatments() {
   ];
 
   return (
-    <section id="treatments" className="relative py-24 sm:py-32">
+    <section id="treatments" className="relative py-16 sm:py-32">
       <div className="container-luxe">
         <SectionHeader index="04" eyebrow={t.treatments.eyebrow} title={t.treatments.title} lede={t.treatments.lede} />
-        <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:grid-rows-[auto_auto]">
+        <div className="mt-10 sm:mt-14 grid gap-5 lg:grid-cols-3 lg:grid-rows-[auto_auto]">
           {TREATMENTS.map((x, i) => (
             <BentoCard key={x.id} t={x} index={i} />
           ))}

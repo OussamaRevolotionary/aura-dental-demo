@@ -98,7 +98,7 @@ export default function Navbar() {
             </button>
             <button
               onClick={() => setMobileOpen(true)}
-              className={`grid h-10 w-10 place-items-center rounded-full border xl:hidden ${onDark ? "border-white/15" : "border-ink/10 bg-white/70"}`}
+              className={`grid h-11 w-11 place-items-center rounded-full border xl:hidden ${onDark ? "border-white/15" : "border-ink/10 bg-white/70"}`}
               aria-label={t.nav.openMenu}
             >
               <Menu className="h-4 w-4" />
@@ -201,7 +201,7 @@ export function LanguageSwitcher({ dark = false, id, className = "" }: { dark?: 
           aria-pressed={lang === l.id}
           aria-label={l.id === "ar" ? "العربية" : l.id === "fr" ? "Français" : "English"}
           lang={l.id}
-          className={`relative z-10 h-8 min-w-[34px] rounded-full px-2 text-[11px] font-medium transition-colors ${
+          className={`relative z-10 h-9 min-w-[36px] rounded-full px-2 text-[11px] font-medium transition-colors ${
             lang === l.id ? (dark ? "text-ink" : "text-alabaster") : dark ? "text-white/60 hover:text-white" : "text-ink-muted hover:text-ink"
           } ${l.id === "ar" ? "font-sans text-[14px] leading-none" : "font-mono"}`}
         >

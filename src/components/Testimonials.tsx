@@ -15,7 +15,7 @@ export default function Testimonials() {
   const { t } = useI18n();
 
   return (
-    <section id="reviews" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="reviews" className="relative overflow-hidden py-16 sm:py-32">
       <div className="container-luxe">
         <SectionHeader index="07" eyebrow={t.reviews.eyebrow} title={t.reviews.title} />
         <Reveal delay={0.1} className="mt-10">

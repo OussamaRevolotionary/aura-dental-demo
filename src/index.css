@@ -51,6 +51,9 @@
   }
   body {
     @apply bg-alabaster font-sans text-ink antialiased;
+    /* safety net: one over-wide element must never make phones zoom the whole page out */
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
     font-feature-settings: "ss01", "cv11";
     text-rendering: optimizeLegibility;
   }
@@ -111,6 +114,15 @@
   }
 }
 
+@layer base {
+  /* phones: keep the footer clear of the sticky Call · WhatsApp · Book bar */
+  @media (max-width: 639px) {
+    body {
+      padding-bottom: calc(68px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
 @layer components {
   .container-luxe {
     @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12;
@@ -122,7 +134,7 @@
     @apply font-serif font-normal leading-[0.98] tracking-[-0.02em];
   }
   .h-section {
-    @apply text-[42px] sm:text-[58px] lg:text-[70px];
+    @apply text-[36px] sm:text-[58px] lg:text-[70px];
   }
 
   /* One button system, used everywhere */
@@ -159,7 +171,7 @@
     @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em];
   }
   .field {
-    @apply w-full rounded-xl border border-ink/10 bg-white px-4 py-3.5 text-[15px] outline-none transition placeholder:text-ink/30 focus:border-emerald focus:shadow-[0_0_0_4px_rgb(var(--emerald)/0.1)];
+    @apply w-full rounded-xl border border-ink/10 bg-white px-4 py-3.5 text-[16px] outline-none transition placeholder:text-ink/30 focus:border-emerald focus:shadow-[0_0_0_4px_rgb(var(--emerald)/0.1)];
   }
   .choice {
     @apply rounded-xl border border-ink/10 bg-white px-3 py-2.5 text-[12.5px] font-medium transition hover:border-ink/30;

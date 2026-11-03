@@ -97,7 +97,7 @@ export default function Hero() {
             <span className="eyebrow text-[10px] tracking-[0.16em] text-gold-deep sm:text-[10.5px]">{t.hero.badge}</span>
           </motion.div>
 
-          <h1 key={lang} aria-label={plain(t.hero.title.join(" "))} className="display mt-7 text-[44px] text-ink sm:text-[62px] lg:text-[74px] xl:text-[84px]">
+          <h1 key={lang} aria-label={plain(t.hero.title.join(" "))} className="display mt-6 text-[40px] text-ink sm:mt-7 sm:text-[62px] lg:text-[74px] xl:text-[84px]">
             <WordReveal lines={t.hero.title} />
           </h1>
 
@@ -133,7 +133,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: 1.05 }}
-            className="mt-12 flex max-w-[560px] flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-6 text-[13px] text-ink-muted"
+            className="mt-9 flex max-w-[560px] flex-wrap items-center gap-x-6 gap-y-3 border-t sm:mt-12 border-ink/10 pt-6 text-[13px] text-ink-muted"
           >
             <a href={CLINIC.googleReviewsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 transition hover:text-ink">
               <span className="flex" dir="ltr">
@@ -171,7 +171,7 @@ export default function Hero() {
           <motion.div
             dir="ltr"
             style={{ rotateX: rx, rotateY: ry }}
-            className="relative aspect-[4/5] overflow-hidden rounded-media bg-obsidian shadow-2xl ring-1 ring-black/10 sm:aspect-[5/5.4] lg:aspect-[4/5]"
+            className="relative aspect-[4/3.8] overflow-hidden rounded-media bg-obsidian shadow-2xl ring-1 ring-black/10 sm:aspect-[5/5.4] lg:aspect-[4/5]"
           >
             <video
               className="absolute inset-0 h-full w-full object-cover"

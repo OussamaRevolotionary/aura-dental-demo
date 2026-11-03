@@ -44,7 +44,7 @@ export default function BeforeAfterGallery() {
     );
 
   return (
-    <section id="gallery" className="relative py-24 sm:py-32">
+    <section id="gallery" className="relative py-16 sm:py-32">
       <div className="container-luxe">
         <SectionHeader index="01" eyebrow={t.gallery.eyebrow} title={t.gallery.title} />
 

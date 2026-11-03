@@ -60,11 +60,11 @@ export default function SmileStyles() {
   const item = s.items[active];
 
   return (
-    <section id="styles" className="relative py-24 sm:py-32">
+    <section id="styles" className="relative py-16 sm:py-32">
       <div className="container-luxe">
         <SectionHeader index="02" eyebrow={s.eyebrow} title={s.title} lede={s.lede} tone="gold" />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
           <Reveal className="flex flex-col">
             <div role="radiogroup" aria-label={s.eyebrow} className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0">
               {IDS.map((id) => {

@@ -17,12 +17,12 @@ export default function SanctuarySection() {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <section id="sanctuary" className="relative overflow-hidden bg-[#F2EEE6] py-24 sm:py-32">
+    <section id="sanctuary" className="relative overflow-hidden bg-[#F2EEE6] py-16 sm:py-32">
       <div aria-hidden className="grain pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply" />
       <div className="container-luxe relative">
         <SectionHeader index="05" eyebrow={s.eyebrow} title={s.title} tone="gold" />
 
-        <Reveal className="mt-14">
+        <Reveal className="mt-10 sm:mt-14">
           <div ref={ref} className="relative aspect-[4/5] overflow-hidden rounded-media shadow-luxe sm:aspect-[16/9]">
             {playing ? (
               <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline poster={CLINIC_LOUNGE_IMAGE}>

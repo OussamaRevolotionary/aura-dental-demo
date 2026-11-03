@@ -10,15 +10,15 @@ export default function EditorialIntro() {
   const e = t.intro;
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const drift = [useTransform(scrollYProgress, [0, 1], [40, -40]), useTransform(scrollYProgress, [0, 1], [90, -90]), useTransform(scrollYProgress, [0, 1], [10, -10])];
-  const offsets = ["mt-16", "mt-0", "-mt-10"];
+  const drift = [useTransform(scrollYProgress, [0, 1], [40, -40]), useTransform(scrollYProgress, [0, 1], [60, -60]), useTransform(scrollYProgress, [0, 1], [10, -10])];
+  const offsets = ["mt-8 sm:mt-16", "mt-0", "-mt-4 sm:-mt-10"];
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-24 sm:py-32">
-      <div className="container-luxe grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+    <section ref={ref} className="relative overflow-hidden py-16 sm:py-32">
+      <div className="container-luxe grid items-center gap-10 sm:gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <Reveal>
           <div className="border-y border-ink/15 py-8">
-            <h2 className="display text-balance text-[48px] uppercase leading-[0.95] tracking-[0.02em] sm:text-[68px] lg:text-[76px]">
+            <h2 className="display text-balance text-[40px] uppercase leading-[0.95] tracking-[0.02em] sm:text-[68px] lg:text-[76px]">
               <Rich text={e.title} accent="text-gold-deep" />
             </h2>
             <p className="mt-5 text-[19px] font-medium tracking-tight sm:text-[22px]">{e.sub}</p>

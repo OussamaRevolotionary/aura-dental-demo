@@ -18,7 +18,7 @@ export default function PatientJourney() {
   const progress = `${(active / last) * 100}%`;
 
   return (
-    <section id="journey" className="relative py-24 sm:py-32">
+    <section id="journey" className="relative py-16 sm:py-32">
       <div className="container-luxe">
         <SectionHeader index="06" eyebrow={j.eyebrow} title={j.title} />
 

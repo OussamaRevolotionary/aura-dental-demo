@@ -14,11 +14,11 @@ export default function FAQ() {
   const isOpen = clinicStatus().open;
 
   return (
-    <section id="faq" className="relative bg-[#F2EEE6] py-24 sm:py-32">
+    <section id="faq" className="relative bg-[#F2EEE6] py-16 sm:py-32">
       <div className="container-luxe">
         <SectionHeader index="08" eyebrow={f.eyebrow} title={f.title} />
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
+        <div className="mt-10 sm:mt-14 grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
           <Reveal>
             <ul className="divide-y divide-ink/10 border-y border-ink/10">
               {f.items.map((item, i) => {
