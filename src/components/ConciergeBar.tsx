@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { CalendarCheck, CalendarDays, Check, CheckCircle2, ClipboardList, LayoutDashboard, Loader2, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { BOOKING_API, bookVisit, fetchSlots, isoDay } from "../config/bookingApi";
+import { useSandboxText } from "../config/sandbox";
+import { BOOKING_API, LIVE, bookVisit, fetchSlots, isoDay } from "../config/bookingApi";
 import { CLINIC, clinicStatus, sendLead, telLink, whatsappLink } from "../config/clinic";
 import { DEMO } from "../config/demo";
 import { useUI } from "../context/UIContext";
@@ -139,6 +140,7 @@ function BookingForm({ onClose }: { onClose: () => void }) {
   const { t, locale } = useI18n();
   const { openPanel } = useUI();
   const b = t.booking;
+  const sbx = useSandboxText();
   const days = useMemo(() => {
     const out: Date[] = [];
     const d = new Date();
@@ -240,6 +242,7 @@ function BookingForm({ onClose }: { onClose: () => void }) {
         <p className="mx-auto mt-2 max-w-sm text-[14px] leading-[1.7] text-ink-muted">
           {booked ? fmt(b.booked.body, { date: dateLabel, time: slot ?? "" }) : fmt(b.done.body, { coord: CLINIC.coordinatorName, date: dateLabel, time: slot ?? "" })}
         </p>
+        {booked && !LIVE && <p className="mx-auto mt-3 max-w-sm rounded-full border border-hairline bg-white px-4 py-1.5 text-[12.5px] font-semibold text-ink">{sbx.booked}</p>}
         <div className="mt-7 flex flex-col gap-3">
           {booked && (
             <button onClick={() => openPanel("form", name.trim())} className="btn-primary group">

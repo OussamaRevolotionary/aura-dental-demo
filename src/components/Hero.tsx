@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type 
 import { Award, BadgeCheck, FlaskConical, Gem, Play, ShieldCheck, Star, X } from "lucide-react";
 import { Fragment, useEffect, useState, type MouseEvent } from "react";
 import { CLINIC } from "../config/clinic";
+import { useSandboxText } from "../config/sandbox";
 import { CLINIC_CORRIDOR_VIDEO, CLINIC_LOUNGE_IMAGE, HERO_POSTER_URL, HERO_VIDEO_URL } from "../config/mediaAssets";
 import { useUI } from "../context/UIContext";
 import { useOverlay } from "../hooks/useLockBody";
@@ -60,6 +61,7 @@ function WordReveal({ lines }: { lines: string[] }) {
 export default function Hero() {
   const { openQuiz } = useUI();
   const { t, lang, locale } = useI18n();
+  const sbx = useSandboxText();
   const [tourOpen, setTourOpen] = useState(false);
   const values = useTelemetry();
   const month = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(new Date());
@@ -142,7 +144,7 @@ export default function Hero() {
                 ))}
               </span>
               <span className="font-semibold text-ink">{CLINIC.rating}</span>
-              {fmt(t.hero.reviews, { n: CLINIC.reviewCount })}
+              {fmt(t.hero.reviews, { n: CLINIC.reviewCount })} <span className="text-[11px] opacity-70">({sbx.sample})</span>
             </a>
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-emerald" /> {t.hero.painFree}

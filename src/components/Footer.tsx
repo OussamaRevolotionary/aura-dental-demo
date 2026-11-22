@@ -1,6 +1,7 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { CLINIC, telLink } from "../config/clinic";
 import { useUI } from "../context/UIContext";
+import { useSandboxText } from "../config/sandbox";
 import { Rich, useI18n } from "../i18n";
 import { LanguageSwitcher, NAV_IDS } from "./Navbar";
 import { Arrow, Reveal } from "./ui";
@@ -9,6 +10,7 @@ export default function Footer() {
   const { openQuiz, openBooking } = useUI();
   const { t } = useI18n();
   const f = t.footer;
+  const sbx = useSandboxText();
   return (
     <footer data-nav-dark className="relative overflow-hidden bg-obsidian text-alabaster">
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-emerald/20 blur-[140px]" />
@@ -98,6 +100,7 @@ export default function Footer() {
         <span>
           © {new Date().getFullYear()} AURA Dental Studio AG. {f.rights}
         </span>
+        <span className="mt-2 block font-semibold uppercase tracking-[0.14em] text-white/60">{sbx.label}</span>
       </div>
     </footer>
   );

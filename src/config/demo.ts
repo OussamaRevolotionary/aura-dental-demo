@@ -1,7 +1,7 @@
 /**
  * Demo personalisation, read from the link you send a clinic:
  *
- *   /?for=Lava%20Dental&city=Riga&lang=en&theme=forest&wa=37122008746
+ *   /?for=Lava%20Dental&city=Riga&lang=en&theme=forest&wa=41790000000
  *
  *   for    clinic name — shown in the welcome bar and in every WhatsApp message
  *   city   optional, shown next to the name

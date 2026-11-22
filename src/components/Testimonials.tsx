@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
 import { CLINIC } from "../config/clinic";
+import { useSandboxText } from "../config/sandbox";
 import { REVIEWS, type Review } from "../config/reviews";
 import { fmt, useI18n } from "../i18n";
 import { Arrow, Reveal, SectionHeader } from "./ui";
@@ -13,6 +14,7 @@ function relative(daysAgo: number, locale: string) {
 
 export default function Testimonials() {
   const { t } = useI18n();
+  const sbx = useSandboxText();
 
   return (
     <section id="reviews" className="relative overflow-hidden py-16 sm:py-32">
@@ -33,7 +35,7 @@ export default function Testimonials() {
                 ))}
               </span>
               <span className="mt-1 block text-[12.5px] text-ink-muted">
-                {t.reviews.average} · {fmt(t.reviews.count, { n: CLINIC.reviewCount })}
+                {t.reviews.average} · {fmt(t.reviews.count, { n: CLINIC.reviewCount })} · {sbx.sample}
               </span>
             </span>
             <span className="flex items-center gap-1.5 text-[13px] font-semibold text-emerald">
@@ -50,6 +52,7 @@ export default function Testimonials() {
           ))}
         </div>
       </div>
+      <p className="container-luxe mt-6 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">{sbx.label} · {sbx.sample}</p>
     </section>
   );
 }

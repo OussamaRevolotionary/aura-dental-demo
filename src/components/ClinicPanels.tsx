@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { CalendarCheck, CheckCircle2, ClipboardList, Loader2, RefreshCw, ShieldCheck, Users, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { BOOKING_API, fetchBookings, type LiveBooking } from "../config/bookingApi";
+import { useSandboxText } from "../config/sandbox";
+import { BOOKING_API, LIVE, fetchBookings, type LiveBooking } from "../config/bookingApi";
 import { CLINIC } from "../config/clinic";
 import { DEMO } from "../config/demo";
 import { useUI } from "../context/UIContext";
@@ -207,13 +208,14 @@ type Row = LiveBooking & { sample?: boolean };
 function ClinicView({ onClose }: { onClose: () => void }) {
   const { t, locale } = useI18n();
   const c = t.clinicView;
+  const sbx = useSandboxText();
   const [rows, setRows] = useState<Row[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [loading, setLoading] = useState(false);
   const forms = useMemo(readForms, []);
 
   const load = useCallback(() => {
-    if (!BOOKING_API) return;
+    if (!BOOKING_API || !LIVE) return;
     setLoading(true);
     fetchBookings()
       .then((b) => {
@@ -264,8 +266,8 @@ function ClinicView({ onClose }: { onClose: () => void }) {
   return (
     <>
       <PanelHeader title={`${DEMO.clinic || CLINIC.name} · ${c.title}`} onClose={onClose} closeLabel={c.close}>
-        <span className={`chip hidden sm:inline-flex ${failed ? "border-hairline bg-white text-ink-muted" : "border-emerald/30 bg-emerald-soft text-emerald-deep"}`}>
-          <span className={`h-1.5 w-1.5 rounded-full ${failed ? "bg-ink/30" : "bg-emerald"}`} /> {failed ? c.offline : c.live}
+        <span className={`chip hidden sm:inline-flex ${failed || !LIVE ? "border-hairline bg-white text-ink-muted" : "border-emerald/30 bg-emerald-soft text-emerald-deep"}`}>
+          <span className={`h-1.5 w-1.5 rounded-full ${failed || !LIVE ? "bg-ink/30" : "bg-emerald"}`} /> {!LIVE ? sbx.label : failed ? c.offline : c.live}
         </span>
       </PanelHeader>
 

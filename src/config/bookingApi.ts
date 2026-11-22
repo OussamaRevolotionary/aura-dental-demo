@@ -25,7 +25,19 @@ export function isoDay(d: Date) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
+/** Sandbox by default: only `?live=1` talks to the n8n backend. Everything else is local and offline. */
+export const LIVE = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("live") === "1";
+
+/** Deterministic fake free slots for a day (same day → same slots), never touches the network. */
+export function demoSlots(day: string): string[] {
+  const pool = ["08:30", "09:45", "11:00", "13:30", "15:00", "16:15", "17:30"];
+  let h = 0;
+  for (const ch of day) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return pool.filter((_, i) => (h >> i) % 3 !== 0).slice(0, 4);
+}
+
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
+  if (!LIVE) throw new Error("sandbox");
   const ctrl = new AbortController();
   const timer = window.setTimeout(() => ctrl.abort(), 12_000);
   try {
@@ -38,10 +50,12 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export function fetchSlots(day: string) {
+  if (!LIVE) return Promise.resolve(demoSlots(day));
   return call<{ day: string; slots: string[] }>(`aura-slots?day=${day}`).then((r) => r.slots);
 }
 
 export function bookVisit(payload: Record<string, string>) {
+  if (!LIVE) return Promise.resolve(); // demo mode: nothing is sent or stored
   return call<{ ok: boolean }>("aura-book", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -52,5 +66,6 @@ export function bookVisit(payload: Record<string, string>) {
 }
 
 export function fetchBookings() {
+  if (!LIVE) return Promise.resolve<LiveBooking[]>([]);
   return call<{ bookings: LiveBooking[] }>("aura-bookings").then((r) => r.bookings);
 }

@@ -149,7 +149,7 @@ function Maker({ onClose }: { onClose: () => void }) {
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="Their WhatsApp number, e.g. +371 2200 8746"
+            placeholder="Their WhatsApp number, e.g. +41 79 000 00 00"
             aria-label="Clinic WhatsApp number"
             type="tel"
             className="field"
